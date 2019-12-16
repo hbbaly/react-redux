@@ -1,20 +1,19 @@
-import ActionTypes from './actionTypes'
+import actionTypes from './actionTypes'
 import {fromJS} from 'immutable'
 const defaultValue = fromJS({
-  count: 0,
-  imgList: []
+  todoList: [],
+  inputValue: ''
 })
-
-const Count = (state = defaultValue, action) => {
+const Todo = (state = defaultValue, action) => {
   switch (action.type) {
-    case ActionTypes.DECRENMENT:
-      return state.set('count', state.get('count') - 1)
-    case ActionTypes.INCRENMENT:
-      return state.set('count', state.get('count') + 1)
-      case ActionTypes.GET_IMG_RANDOM:
-      return state.set('imgList', action.data)
+    case actionTypes.ADD_TODO:
+      return state.set('todoList', state.get('todoList').push(state.get('inputValue')))
+    case actionTypes.DEL_TODO:
+      return state.get('todoList').delete(action.data)
+    case actionTypes.GET_INPUT:
+      return state.set('inputValue', action.data)
     default:
       return state
   }
 }
-export default Count
+export default Todo

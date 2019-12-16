@@ -1,11 +1,8 @@
-/**
- * 
-*/
-const DECRENMENT = 'decrenment'
-const INCRENMENT = 'increnment'
-const GET_IMG_RANDOM ='getImgRandom'
+const ADD_TODO = 'addTodo'
+const DEL_TODO = 'delTodo'
+const GET_INPUT = 'getInput'
 export default {
-  DECRENMENT,
-  INCRENMENT,
-  GET_IMG_RANDOM
+  ADD_TODO,
+  DEL_TODO,
+  GET_INPUT
 }

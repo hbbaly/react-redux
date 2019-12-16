@@ -1,40 +1,40 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import { Wrapper, ButtonWrapper } from './style'
-import store from './store/index'
-class Count extends Component {
+import store from './store'
+import { Wrapper, List, Add } from './style'
+class Todo extends Component {
   render () {
     return (
+      <div>
       <Wrapper>
-        <Wrapper>{this.props.count}times</Wrapper>
-        <ButtonWrapper onClick={this.props.decrenment}>-</ButtonWrapper>
-        <ButtonWrapper onClick={this.props.increnment}>+</ButtonWrapper>
-        <Wrapper>
-          <Wrapper>获取图片</Wrapper>
-          <ButtonWrapper onClick={this.props.getImgRandom}>获取</ButtonWrapper>
-          {this.props.imgList.map(item=>(
-            <img src={item.imageUrl} key={item.id}/>
-          ))}
-        </Wrapper>
+        <input type='text' placeholder='请输入内容'
+          onChange={this.props.getInput} />
+        <Add onClick={this.props.addTodo}>添加</Add>
       </Wrapper>
+      {
+        this.props.todoList.map((item, index) => (
+          <List key={item.id}>{index+1}:{item}</List>
+        ))
+      }
+      </div>
+      
     )
   }
 }
-const mapStateToProps = (state) => {
-  return ({
-    count: state.get('Count').get('count'),
-    imgList: state.get('Count').get('imgList')
-  })
-}
+const mapStateToProps = (state) => ({
+  todoList: state.get('Todo').get('todoList'),
+  inputValue: state.get('Todo').get('inputValue')
+})
 const mapDispatchToProps = (dispatch) => ({
-  decrenment(){
-    dispatch(store.creators.decrenment())
+  addTodo (e) {
+    dispatch(store.creators.addTodo())
   },
-  increnment(){
-    dispatch(store.creators.increnment())
+  delTodo (data) {
+    dispatch(store.creators.addTodo(data))
   },
-  getImgRandom () {
-    dispatch(store.creators.getImgRandom())
+  getInput (e) {
+    if (!e.target.value) return
+    dispatch(store.creators.getInput(e.target.value))
   }
 })
-export default connect(mapStateToProps,mapDispatchToProps)(Count)
+export default connect(mapStateToProps, mapDispatchToProps)(Todo)
