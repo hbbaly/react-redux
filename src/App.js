@@ -2,7 +2,8 @@ import React from 'react';
 import {Provider} from 'react-redux'
 import store from './store/index'
 import {GlobalStyle} from './reset.js';
-import Count from './view/todo/index'
+import Count from './view/count/index'
+import Todo from './view/todo/index'
 class App extends React.Component{
   render() {
     return (
@@ -10,6 +11,7 @@ class App extends React.Component{
         <div className="App">
           <GlobalStyle />
           <Count />
+          <Todo />
         </div>
       </Provider>
     )
